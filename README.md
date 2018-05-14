@@ -14,8 +14,7 @@ The developed system has the next features:
 System was developed in the context of diploma project at BSUIR and it won't be used by 'Velcom'. It's my own made-up customer. Though system was developed for telecommunication company, It can easily reconfigured for providing other services (hosting services, housing and communal services, etc).
 
 The developed system was located on hosting site - [Billing System Velcomve](https://velcom-billing-system.000webhostapp.com/).
+
 Login credentials:
-
 email - anna.trof@tut.by
-
 password - 766075
