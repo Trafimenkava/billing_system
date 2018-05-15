@@ -335,7 +335,7 @@
                                     <label class="control-label">Триггер</label>
                                     <select class="form-control" name="trigger" id="edit_form_trigger">
 										<option value="Регистрация">Регистрация</option>
-										<option value="Подключение услуги">Подключение услуги</option>
+										<option value="Подключение услуги">Подключение услуги</option>																				<option value="Недостаток средств">Недостаток средств</option>																				<option value="Блокировка услуги">Блокировка услуги</option>
 									</select>
                                 </div>
                                 <div class="form-group pull-right">
