@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	session_start();
 	require_once("php/Database.php");
 	require_once("php/TariffPlan.php");
@@ -9,7 +9,7 @@
 	$conn = DataBase::getConnection();
 	
 	$action = $_GET["action"];
-	$tariff_plan_id = isset($_GET['id']) ? $_GET['id'] : '';  
+	$tariff_plan_id = $_GET["id"];
 		
 	$title = $_POST["title"];
 	$description = $_POST["description"];

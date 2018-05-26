@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once("php/Database.php");
 require_once("php/QueryConsts.php");
@@ -16,9 +16,8 @@ if(isset($_POST["register"])){
 	$email = trim($_POST['email']);
 	$password = trim($_POST['password']);
 	$repeat_password = trim($_POST['repeat_password']);
-	$is_admin = isset($_POST['is_admin']) ? trim($_POST['is_admin']) : ''; 
+	$is_admin = trim($_POST['is_admin']);
 	$is_admin = $is_admin == "on" ? 1 : 0;
-	$message = '';
 	
 	$notificationParams = array(
 		'$_SURNAME', $surname,
@@ -37,9 +36,7 @@ if(isset($_POST["register"])){
 		$result = $user->checkUserWithGivenEmailNotExist($conn);	
 			
 		if($result) {
-		    $password = password_hash($password, PASSWORD_DEFAULT);
-		    // $password = crypt($password);
-			$result = $user->addUser($conn,	array($name, $surname, $lastname, $email, $password, date("Y-m-d H:i:s"), $is_admin));
+			$result = $user->addUser($conn,	array($name, $surname, $lastname, $email, crypt($password), date("Y-m-d H:i:s"), $is_admin));
 			
 			if($result){ 
 				$user->addClientId($conn, $result);

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once("Database.php");
 require_once("TariffPlan.php");
 require_once("QueryConsts.php");

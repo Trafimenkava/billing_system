@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 interface QueryConsts {
 	/* SELECT QUERIES */
 	const GET_USER_BY_EMAIL_QUERY = "SELECT * FROM users WHERE email = '?'";
@@ -30,6 +30,9 @@ interface QueryConsts {
 	const GET_POPULAR_TARIFF_PLANS_QUERY = "SELECT title, COUNT(tariff_plans.tariff_plan_id) as amount FROM services INNER JOIN tariff_plans ON services.tariff_plan_id = tariff_plans.tariff_plan_id GROUP BY tariff_plans.tariff_plan_id ORDER BY amount DESC LIMIT 10";
 	const GET_DISTRIBUTION_OF_TARIFF_PLANS_QUERY = "SELECT tariff_plans_groups.title, COUNT(tariff_plans.tariff_plan_id) as amount FROM tariff_plans INNER JOIN tariff_plans_groups ON tariff_plans.tariff_plan_group_id = tariff_plans_groups.tariff_plan_group_id GROUP BY tariff_plans.tariff_plan_group_id ORDER BY amount DESC LIMIT 10";
 	const GET_MONTHLY_SERVICES_QUERY = "SELECT connection_date, COUNT(service_id) AS amount FROM services WHERE MONTH(connection_date) = MONTH(DATE_ADD(NOW(), INTERVAL -1 MONTH)) AND YEAR(connection_date) = YEAR(NOW()) GROUP BY connection_date";
+	const GET_SERVICES_FOR_ACTIVATION_QUERY = "SELECT * FROM services JOIN accounts USING(service_id) JOIN tariff_plans USING(tariff_plan_id) JOIN clients USING(client_id) JOIN users ON clients.client_id = users.user_id WHERE DAY(connection_date) = DAY(NOW()) OR is_outstanding = 1";
+	const GET_PAYMENTS_BY_ACCOUNT_ID_QUERY = "SELECT * FROM payments WHERE account_id = ?";
+	const GET_PAYMENT_BY_PAYMENT_ID_QUERY = "SELECT * FROM payments WHERE payment_id = ?";
 	
 	/* INSERT QUERIES */
 	const ADD_TARIFF_PLAN_QUERY = "INSERT INTO tariff_plans(title, description, tariff_plan_group_id, internet_traffic_mb, phone_traffic_within_network_min, phone_traffic_all_networks_min, international_calls_traffic_min, sms_within_network, sms_all_networks, mms_within_network, mms_all_networks, favorite_numbers_amount, state, subscription_fee) values('?', '?', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '?', ?)";
@@ -47,6 +50,10 @@ interface QueryConsts {
 	const UPDATE_USER_IMAGE_QUERY = "UPDATE users SET image = '?' WHERE user_id = ?";
 	const UPDATE_CLIENT_QUERY = "UPDATE clients SET passport_number = '?', birthday_date = '?', address = '?', card_number = '?' WHERE client_id = ?";
 	const UPDATE_NOTIFICATION_QUERY = "UPDATE notifications SET send_to = '?', send_from = '?', subject = '?', content = '?', trigger_type = '?' WHERE notification_id = ?";
+	const UPDATE_SERVICE_STATUS = "UPDATE services SET status = '?' WHERE service_id = ?";
+	const UPDATE_ACCOUNT_BALANCE = "UPDATE accounts SET balance = balance - ? WHERE account_id = ?";
+	const UPDATE_SERVICE_IS_OUTSTANDING_FLAG = "UPDATE services SET is_outstanding = ? WHERE service_id = ?";
+	const UPDATE_SERVICE_TARIFF_PLAN_QUERY = "UPDATE services SET tariff_plan_id = ? WHERE service_id = ?";
 	
 	/* DELETE QUERIES */
 	const DELETE_USER_BY_USER_ID_QUERY = "DELETE FROM users WHERE user_id = ?";

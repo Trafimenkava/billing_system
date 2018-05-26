@@ -100,7 +100,7 @@ input[type=password] {
 	margin: 10px;
 	margin-top: 12px;
 	margin-left: 18px;
-	width: 293px;
+	width: 303px;
 	height: 35px;
 	border: 1px solid #c7d0d2;
 	border-radius: 2px;
@@ -178,7 +178,7 @@ input[type=submit]:active {
 	background-image: -moz-linear-gradient(top left 90deg, #6ec2e8 0%, #b6e2ff 100%);
 	background-image: linear-gradient(top left 90deg, #6ec2e8 0%, #b6e2ff 100%);
 }
-/* Г‘ГІГЁГ«ГЁ ГЎГ Г°Г  vladmaxi, Г¬Г®Г¦Г­Г® ГіГ¤Г Г«ГЁГІГј */
+/* Стили бара vladmaxi, можно удалить */
 .vladmaxi-top{
 	line-height: 24px;
 	font-size: 11px;

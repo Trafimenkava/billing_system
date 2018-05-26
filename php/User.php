@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once("Database.php");
 require_once("QueryConsts.php");
 	
@@ -35,7 +35,7 @@ class User {
 		return $result;
 	}
 	
-	public function deleteUser($conn) {
+	public function deleteUser($conn, $id) {
 		$result = $conn->query(QueryConsts::DELETE_USER_BY_USER_ID_QUERY, array($this->id));
 		return $result;
 	}

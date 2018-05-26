@@ -10,7 +10,7 @@ class Service {
 	public $status;
 	public $params;
 	
-	public function __construct($id, $client_id, $tariff_plan_id, $telephone_number, $status) {
+	public function __construct($id, $client_id = null, $tariff_plan_id = null, $telephone_number = null, $status = null) {
 		$this->id = $id;
 		$this->client_id = $client_id;
 		$this->tariff_plan_id = $tariff_plan_id;
@@ -36,6 +36,25 @@ class Service {
 		$result = $conn->query(QueryConsts::ADD_SERVICE_QUERY, 
 								array($this->client_id, $this->tariff_plan_id, $this->telephone_number, $this->status));
 		return $result;
+	}
+	
+	public function updateServiceTariffPlan($conn, $tp_id) {	
+		$result = $conn->query(QueryConsts::UPDATE_SERVICE_TARIFF_PLAN_QUERY, array($tp_id, $this->id));
+		return $result;
+	}
+	
+	public function setServiceStatus($conn, $status) {
+        $result = $conn->query(QueryConsts::UPDATE_SERVICE_STATUS, array($status, $this->id));
+        return $result;
+    }
+	
+	public function setIsOutstandingFlag($conn, $flag) {
+        $result = $conn->query(QueryConsts::UPDATE_SERVICE_IS_OUTSTANDING_FLAG, array($flag, $this->id));
+        return $result;
+    }
+	
+	public function getServiceClientId() {
+		return $this->params['client_id'];
 	}
 	
 	public function getServiceStatus() {

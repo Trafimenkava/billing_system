@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once("php/Database.php");
 require_once("php/QueryConsts.php");
@@ -15,7 +15,7 @@ if ($action == "edit_general_info") {
 	$name = trim($_POST['name']);
 	$lastname = trim($_POST['lastname']);
 	$email = trim($_POST['email']);
-	$is_admin = isset($_POST['is_admin']) ? trim($_POST['is_admin']) : '';
+	$is_admin = trim($_POST['is_admin']);
 	$photo = $_FILES['file'];
 	$photoName = $photo['name'];
 
@@ -39,8 +39,8 @@ if ($action == "edit_general_info") {
 if ($action == "edit_client_info") {
 	$passport_number = trim($_POST['passport_number']);
 	$birthday_date = $_POST['birthday_date'];
-	$address = trim($_POST['address']);
-	$card_number = trim($_POST['card_number']);
+	$address = replaceEmptyFieldByNull(trim($_POST['address']));
+	$card_number = replaceEmptyFieldByNull(trim($_POST['card_number']));
 
 	$client = new Client($id, null, null);
 	$result = $client->editClient($conn, array($passport_number, $birthday_date, $address, $card_number, $id));
@@ -70,6 +70,9 @@ function resize($image, $w_o = false, $h_o = false) {
 	return $func($img_o, $image); 
 }
 
+function replaceEmptyFieldByNull($field) {
+	return $field == '' ? 'NULL' : $field;
+}
 ?>
 	
 	

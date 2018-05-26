@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once("php/Database.php");
 require_once("php/QueryConsts.php");
@@ -18,20 +18,19 @@ if(isset($_POST["login"])){
 		$user  = $user->getUserByEmail($conn);			
 		
 		if($user->getUserId() != null) {
-			$dbpassword = $user->getUserPassword();	 
-			if (password_verify($password, $dbpassword)) {
-			    //crypt($password, $dbpassword) == $dbpassword) {
-				if ($user->getUserRole() == 0) {
-        			$message = "Вы не наделены правами администратора, поэтому не можете войти в систему!";
-        		} else {
-    				$_SESSION["email"] = $email;
-    				if (isset($_POST["remember"])) {
-    					setcookie("email", $email, time() + 3600*24*7, "/", "localhost");
-    				}
-    				header("location: home.php");	
-        		}
+			if ($user->getUserRole() == 0) {
+				$message = "Вы не наделены правами администратора, поэтому не можете войти в систему!";
 			} else {
-				$message = "Неверный пароль!";
+				$dbpassword = $user->getUserPassword();	 
+				if (crypt($password, $dbpassword) == $dbpassword) {
+					$_SESSION["email"] = $email;
+					if (isset($_POST["remember"])) {
+						setcookie("email", $email, time() + 3600*24*7, "/", "localhost");
+					}
+					header("location: home.php");	
+				} else {
+					$message = "Неверный пароль!";
+				}
 			}
 		} else {
 			$message = "Аккаунт " . $email . " не существует!";
@@ -49,7 +48,8 @@ if(isset($_POST["login"])){
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/styles.css">
-	<link rel="icon" href="img/icon.png" type="image/x-icon">
+	<link rel="icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="http://vladmaxi.net/favicon.ico" type="image/x-icon">
 </head>
 <body>	
 	<?php if (!empty($message)) {echo "<p style='background: red;' class='msg'>" . "ОШИБКА: ". $message . "</p>";} ?>
@@ -65,3 +65,10 @@ if(isset($_POST["login"])){
 	</div>
 </body>
 </html>
+	
+	
+	
+	
+	
+		
+	

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once("Database.php");
 require_once("QueryConsts.php");
 require_once("User.php");
@@ -30,7 +30,7 @@ class Client extends User {
 		return $result;
 	}
 		
-	public function deleteClient($conn) {
+	public function deleteClient($conn, $id) {
 		$result = $conn->query(QueryConsts::DELETE_CLIENT_BY_CLIENT_ID_QUERY, array($this->id));
 		return $result;
 	}

@@ -1,12 +1,12 @@
-<?php
+﻿<?php
 class Database {
 	private static $conn = null;
 	private $mysqli;
 
 	const MYSQL_SERVER = "localhost";
-	const MYSQL_USER = "id5508922_billing_system_admin";
-	const MYSQL_PASSWORD = "Mc2435330";
-	const MYSQL_DB = "id5508922_billing_system";
+	const MYSQL_USER = "root";
+	const MYSQL_PASSWORD = "";
+	const MYSQL_DB = "billing_system";
 	const QUERY_PARAMS_FILLER = "?"; 
 	
 	private function __construct() {
